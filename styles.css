@@ -1,0 +1,1128 @@
+/* =========================================================
+   TutorBridge — styles matching the provided wireframes
+   Flat, grayscale-with-one-accent wireframe look:
+   grey-blue page background, floating white rounded cards
+   with a soft shadow, teal-blue accent blocks, thin grey
+   divider lines instead of boxed/shadowed rows.
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root{
+  --bg:         #DCE5E6;   /* page backdrop */
+  --panel:      #FFFFFF;   /* card surface */
+  --teal:       #A7C1C5;   /* accent block / avatar fill */
+  --teal-deep:  #8FB0B5;   /* hover / darker accent */
+  --text:       #45535A;   /* headings, primary text */
+  --text-soft:  #8798A0;   /* secondary text, placeholders */
+  --line:       #89989b;   /* divider lines, borders */
+  --line-strong:#B7C4C6;
+  --star:       #7C8D94;   /* rating stars */
+  --white:      #FFFFFF;
+  --choice-panels: #e5f1f7;
+  --username-bg: #edf7f8; 
+
+  --radius-card: 14px;
+  --radius-ctrl: 8px;
+
+  --shadow-card: 0 6px 8px -4px rgba(69, 83, 90, 0.571);
+}
+
+*, *::before, *::after{ box-sizing: border-box; }
+
+body{
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+a{ color: inherit; text-decoration: none; }
+button, input, textarea, select{ font-family: inherit; font-size: inherit; color: inherit; }
+
+h1, h2, h3{ margin: 0 0 .4em; font-weight: 600; color: var(--text); }
+
+:focus-visible{ outline: 2px solid var(--teal-deep); outline-offset: 2px; }
+
+/* ---------- Page shell ---------- */
+
+.shell{
+  margin: 0 auto;
+  padding: 28px 28px 48px;
+}
+
+/* ---------- Top navigation (its own floating card) ---------- */
+
+.topnav{
+  max-width: var(--shell-max);
+  margin: 28px auto 0;
+  padding: 0 28px;
+}
+
+.topnav-inner{
+  background: var(--panel);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: 18px 32px;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.logo{
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+}
+
+.logo span{ color: var(--teal-deep); }
+
+.search-wrap{ flex: 1 1 auto; max-width: 440px; }
+
+.search-input{
+  width: 100%;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 20px;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.search-input::placeholder{ color: var(--text-soft); }
+
+.nav-links{
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-left: auto;
+  font-weight: 600;
+  color: var(--text-soft);
+  font-size: 14.5px;
+}
+
+.nav-links a{
+  padding: 4px 18px;
+  border-left: 1px solid var(--line);
+}
+.nav-links a:first-child{ border-left: none; }
+
+.nav-links a:hover, .nav-links a.active{ color: var(--text); }
+
+.bell-btn{
+  border: none;
+  background: none;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 4px 0 4px 18px;
+  color: var(--text-soft);
+  border-left: 1px solid var(--line);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+.bell-btn:hover{ color: var(--text); }
+
+.bell-dot{
+  position: absolute;
+  top: 2px; right: -2px;
+  width: 7px; height: 7px;
+  background: var(--teal-deep);
+  border-radius: 50%;
+  border: 1.5px solid var(--white);
+}
+
+/* ---------- Layout grids ---------- */
+
+.two-col{
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+.two-col.right-rail{ grid-template-columns: 1fr 340px; }
+
+.panel{
+  background: var(--panel);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  max-height: 490px;
+}
+
+.panel-head{
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 22px 30px 16px;
+}
+
+.panel-head h2{ font-size: 19px; font-weight: 600; }
+
+/* ---------- Avatars ---------- */
+
+.avatar{
+  border-radius: 50%;
+  background: var(--teal);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  flex: none;
+}
+.avatar.sm{ width: 44px; height: 44px; font-size: 14px; }
+.avatar.md{ width: 64px; height: 64px; font-size: 18px; }
+.avatar.lg{ width: 112px; height: 112px; font-size: 28px; border: 4px solid var(--white); }
+
+/* ---------- Profile card (teal header + white body) ---------- */
+
+.profile-card .cover{
+  height: 200px;
+  background: var(--teal);
+  padding: 34px 24px 22px;
+  text-align: center;
+  justify-content:center;
+  color: var(--white);
+}
+.profile-card .cover .avatar{ margin: 0 auto 12px; background: var(--white); color: var(--teal-deep); }
+.profile-card .cover .name{ font-weight: 700; font-size: 15px; letter-spacing: .03em; }
+.profile-card .cover .role{ font-size: 12.5px; opacity: .85; margin-top: 3px; }
+
+.profile-card .body{ 
+  height: 290px;
+  padding: 20px 26px 26px; 
+  position: relative;
+  top: -10px;
+  border-top-left-radius: var(--radius-card);
+  border-top-right-radius: var(--radius-card);
+  background: var(--panel);
+
+}
+.profile-card .body h3{ font-size: 13.5px; color: var(--text); margin: 16px 0 4px; }
+.profile-card .body h3:first-child{ margin-top: 0; }
+.profile-card .body p{ color: var(--text-soft); margin: 0 0 6px; font-size: 14px; }
+
+/* Settings stacks a variable-height form (two textareas + save row) under
+   the cover instead of the fixed-height .body used on Home/Profile, so it
+   can run taller than the shared .panel's 490px cap — exempt just the
+   height cap here. Keep overflow:hidden (inherited from .panel) so the
+   cover and last text-block still get clipped to the rounded corners. */
+.settings-card{ max-height: none; }
+
+/* ---------- Simple list rows separated by hairlines (matches wireframe) ---------- */
+
+.row-list .row{
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 30px;
+}
+
+.row-list .row::before{
+  content: "";
+  position: absolute;
+  top: 0px;
+  left: 30px;
+  right: 30px;
+  height: 2.3px;
+  background: var(--line);
+}
+.row-list .row:first-child::before{ display: none;} 
+.row-main{ flex: 1 1 auto; min-width: 0; }
+.row-name{ font-weight: 700; font-size: 14.5px; letter-spacing: .01em; }
+.row-meta{ color: var(--text-soft); font-size: 13px; margin-top: 3px; }
+.row-loc{ color: var(--text-soft); font-size: 13px; }
+
+.stars{ color: var(--star); letter-spacing: 2px; font-size: 15px; white-space: nowrap; }
+
+/* ---------- Buttons ---------- */
+
+.btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 9px 20px;
+  border-radius: var(--radius-ctrl);
+  border: 1px solid var(--line-strong);
+  background: var(--white);
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.btn:hover{ border-color: var(--teal-deep); color: var(--teal-deep); }
+
+.btn-primary{ background: var(--teal); border-color: var(--teal); color: var(--white); }
+.btn-primary:hover{ background: var(--teal-deep); border-color: var(--teal-deep); color: var(--white); }
+
+.btn-block{ width: 100%; }
+.btn-sm{ padding: 7px 16px; font-size: 13px; }
+
+/* ---------- Sort / filter controls ---------- */
+
+.sort-select{
+  border: 1px solid var(--line-strong);
+  border-radius: 20px;
+  padding: 7px 16px;
+  background: var(--white);
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--text);
+}
+
+.filter-bar{
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 22px 30px 0;
+}
+.filter-bar select, .filter-bar input{
+  border: 1px solid var(--line-strong);
+  border-radius: 20px;
+  padding: 7px 16px;
+  background: var(--white);
+  font-size: 13px;
+  color: var(--text);
+}
+
+/* ---------- Messages / My Tutors two-pane layout ---------- */
+
+.thread-shell{
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  min-height: 560px;
+}
+
+.thread-list{ border-right: 3px solid var(--line); height: 550px; padding: 6px 0; }
+
+.thread-item{
+  position: relative;
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  padding: 18px 26px;
+  cursor: pointer;
+}
+
+.thread-item::before{
+  content: "";
+  position: absolute;
+  top: 0px;
+  left: 30px;
+  right: 30px;
+  height: 3px;
+  background: var(--line);
+}
+
+.thread-item:first-child::before{ display: none; }
+.thread-item:hover{ background: var(--bg); }
+.thread-item.active{ background: var(--bg); }
+
+.thread-item .row-name{ font-size: 14px; }
+.thread-item .row-meta{ font-size: 12.5px; }
+
+.thread-main{ display: flex; flex-direction: column; }
+
+.thread-main-head{
+  padding: 20px 28px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.thread-messages{
+  flex: 1 1 auto;
+  padding: 26px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: auto;
+}
+
+.bubble{
+  max-width: 62%;
+  padding: 10px 15px;
+  border-radius: 14px;
+  font-size: 14px;
+  line-height: 1.45;
+}
+.bubble.them{ background: var(--bg); border-bottom-left-radius: 4px; align-self: flex-start; }
+.bubble.me{ background: var(--teal); color: var(--white); border-bottom-right-radius: 4px; align-self: flex-end; }
+.bubble-time{ font-size: 11px; color: var(--text-soft); margin-top: 4px; }
+
+.thread-compose{
+  display: flex;
+  gap: 10px;
+  padding: 18px 22px;
+  border-top: 1px solid var(--line);
+}
+.thread-compose input{
+  flex: 1 1 auto;
+  border: 1px solid var(--line-strong);
+  border-radius: 20px;
+  padding: 10px 16px;
+  background: var(--bg);
+}
+
+.empty-state{
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 6px;
+  color: var(--text-soft);
+  text-align: center;
+  padding: 40px;
+}
+
+/* ---------- Forms (login / settings) ---------- */
+
+.field{ margin-bottom: 20px; }
+.field label{ display: block; font-weight: 600; font-size: 13.5px; margin-bottom: 7px; color: var(--text); }
+.field input, .field textarea{
+  width: 100%;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-ctrl);
+  padding: 11px 15px;
+  background: var(--bg);
+}
+.field input:focus, .field textarea:focus{ background: var(--white); }
+.field textarea{ resize: vertical; min-height: 100px; font-family: inherit; }
+.field-hint{ font-size: 12px; color: var(--text-soft); margin-top: 5px; }
+
+.login-compose{
+  position: relative;
+  display: flex;
+  gap: 10px;
+  padding: 18px 22px;
+  width: 50px;
+}
+.login-compose input{
+  flex: 1 1 auto;
+  border: 1px solid var(--line-strong);
+  border-radius: 20px;
+  color: var(--text);
+  padding: 10px 16px;
+  background: var(--username-bg);
+}
+
+.empty-state{
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 6px;
+  color: var(--text-soft);
+  text-align: center;
+  padding: 40px;
+}
+
+/* ---------- Settings text blocks (Education / Past Experience) ---------- */
+
+.text-block{
+  background: var(--white);
+  border-top: 1px solid var(--line);
+  padding: 24px 30px;
+}
+.text-block label{ display: block; font-weight: 700; font-size: 14px; margin-bottom: 10px; color: var(--text); }
+.text-block textarea{
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-ctrl);
+  padding: 12px 15px;
+  background: var(--bg);
+  min-height: 110px;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--text);
+  resize: vertical;
+}
+
+.preference-form{ padding: 4px 0 2px; }
+.preference-form .field{ margin-bottom: 16px; }
+.preference-form select{
+  width: 30%;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-ctrl);
+  padding: 11px 15px;
+  background: var(--bg);
+}
+.preference-form select:focus, .assign-form input:focus{ background: var(--white); }
+
+
+/* ---------- Login page: single centered card, matching wireframe ---------- */
+
+.auth-shell{
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.auth-card{
+  display:flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 450px;
+  max-width: 450px;
+  background: var(--panel);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: 40px 36px;
+  text-align: center;
+  justify-content: space-evenly;
+}
+
+.auth-card h2{ font-size: 26px; font-weight: 600; color: var(--text-soft); margin-bottom: 30px; }
+.auth-card .field{ text-align: left; }
+.auth-card .field label{ color: var(--text); }
+
+.auth-card .btn-primary{ margin-top: 6px; }
+
+.location-controls{
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+}
+
+.location-controls input{
+  min-width: 0;
+  flex: 1;
+}
+
+.location-controls .btn{
+  flex: none;
+  white-space: nowrap;
+}
+
+.field-hint.is-error{ color: #a34a4a; }
+
+.auth-divider{ text-align: center; color: var(--text-soft); font-size: 14px; margin: 20px 0 14px; }
+.auth-foot{ text-align: center; font-size: 14px; }
+.auth-foot a{ color: var(--text); text-decoration: underline; font-weight: 500; }
+
+
+/* setup */
+
+.option-group{
+  display:flex;
+  justify-content: center;
+  gap: 40px;
+}
+
+.option-panel{
+  max-width: 500px;
+  flex: 1;
+  text-align: center;
+  border: 2px solid var(--text-soft);
+  border-radius: 8px;
+  padding: 16px;
+  cursor:pointer;
+  box-shadow: var(--shadow-card);
+}
+
+.option-panel input{
+  position:absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.option-panel:has(input:checked){
+  background: var(--choice-panels);
+}
+
+/* ---------- Misc ---------- */
+
+.section-note{ color: var(--text-soft); font-size: 13.5px; margin: 0 0 20px; }
+
+.pill{
+  display: inline-block;
+  padding: 3px 12px;
+  border-radius: 20px;
+  background: var(--bg);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-soft);
+}
+
+@media (max-width: 860px){
+  .two-col, .two-col.right-rail{ grid-template-columns: 1fr; }
+  .thread-shell{ grid-template-columns: 1fr; }
+  .thread-list{ border-right: none; border-bottom: 1px solid var(--line); }
+  .topnav-inner{ flex-wrap: wrap; }
+  .nav-links{ margin-left: 0; }
+}
+
+/* ---------- Homework panel (My Tutors / My Students detail pane) ---------- */
+
+.hw-pane{ height: 550px; overflow-y: auto; }
+
+/* The shared .panel rule caps height at 490px with overflow:hidden, which
+   would clip this page's 550px two-pane layout before its own scrollbars
+   get a chance to work — override it just here. */
+.thread-panel{ max-height: none; }
+
+.hw-panel{ padding: 22px 30px 30px; }
+
+.hw-panel-head{
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--text);
+  padding-bottom: 14px;
+  border-bottom: 1.5px solid var(--line);
+  margin-bottom: 22px;
+}
+
+.hw-section{ margin-bottom: 30px; }
+.hw-section:last-of-type{ margin-bottom: 0; }
+
+.hw-section-title{
+  font-weight: 600;
+  font-size: 14.5px;
+  color: var(--text);
+  padding-bottom: 8px;
+  border-bottom: 1.5px solid var(--line);
+  margin-bottom: 6px;
+}
+
+.hw-row{
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 11px 0;
+}
+
+.hw-row-title{ flex: 1 1 auto; font-size: 14.5px; color: var(--text); }
+.hw-row-score{ font-size: 13.5px; color: var(--text-soft); white-space: nowrap; }
+.hw-row-meta{ font-size: 13.5px; color: var(--text-soft); white-space: nowrap; min-width: 82px; text-align: right; }
+
+.hw-empty{ color: var(--text-soft); font-size: 13.5px; padding: 10px 0; }
+
+.hw-panel-foot{
+  display: flex;
+  gap: 10px;
+  margin-top: 26px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+
+.btn-pill{ border-radius: 20px; }
+
+/* ---------- Quiz & Flashcards pages ---------- */
+
+/* .panel (shared) caps height at 490px with overflow:hidden — this card's
+   content (question + 4 options + action buttons) can run longer than
+   that, so override it here rather than in the shared rule. */
+.quiz-card{ max-width: 760px; margin: 40px auto; padding: 34px 40px 44px; max-height: none; }
+
+.quiz-back{
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-soft);
+  font-weight: 600;
+  font-size: 15px;
+  margin-bottom: 22px;
+}
+.quiz-back:hover{ color: var(--text); }
+
+.quiz-card h2{ font-size: 20px; }
+
+.quiz-head{ display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
+
+.quiz-counter{
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--text-soft);
+  white-space: nowrap;
+  background: var(--bg);
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+.quiz-rule{ border: none; border-top: 1.5px solid var(--line); margin: 0 0 34px; }
+
+.quiz-question{
+  text-align: center;
+  font-size: 23px;
+  font-weight: 500;
+  color: var(--text);
+  margin: 4px 0 32px;
+}
+
+.quiz-options{ display: flex; flex-direction: column; gap: 16px; max-width: 600px; margin: 0 auto; }
+
+.quiz-option{ display: flex; align-items: center; gap: 14px; cursor: pointer; }
+
+.quiz-option input[type="checkbox"]{
+  width: 20px; height: 20px;
+  border-radius: 4px;
+  border: 1.5px solid var(--line-strong);
+  accent-color: var(--teal-deep);
+  flex: none;
+  cursor: pointer;
+}
+
+.quiz-option-text{
+  flex: 1 1 auto;
+  border: 1.5px solid var(--line-strong);
+  border-radius: 24px;
+  padding: 13px 22px;
+  font-size: 15px;
+  color: var(--text);
+}
+
+.quiz-option.correct .quiz-option-text{ border-color: var(--teal-deep); background: var(--choice-panels); }
+.quiz-option.incorrect .quiz-option-text{ border-color: #C98A8A; background: #F7E7E7; }
+
+.quiz-actions{ display: flex; justify-content: center; gap: 14px; margin-top: 32px; }
+
+.btn:disabled{ opacity: .45; cursor: not-allowed; }
+.btn:disabled:hover{ border-color: var(--line-strong); color: var(--text); }
+
+.quiz-footer{ margin-top: 32px; color: var(--text-soft); font-size: 13.5px; }
+
+.quiz-complete{ text-align: center; padding: 30px 0 10px; }
+.quiz-complete .score{ font-size: 34px; font-weight: 700; color: var(--teal-deep); margin: 12px 0 26px; }
+
+.flashcard{
+  max-width: 600px;
+  min-height: 320px;
+  margin: 0 auto;
+  background: var(--panel);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 34px;
+  padding: 40px;
+  text-align: center;
+}
+
+.flashcard-text{ font-size: 23px; color: var(--text); margin: 0; }
+.flashcard-text.is-answer{ color: var(--teal-deep); font-weight: 600; }
+
+.flashcard-actions{ display: flex; gap: 20px; }
+
+.flashcard-progress{ text-align: center; color: var(--text-soft); font-size: 13.5px; margin-top: 18px; }
+
+/* ---------- Assign Homework page ---------- */
+
+.assign-back{ margin: 22px 30px 0; }
+
+.assign-form{ padding: 4px 0 2px; }
+.assign-form .field{ margin-bottom: 16px; }
+.assign-form select{
+  width: 100%;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-ctrl);
+  padding: 11px 15px;
+  background: var(--bg);
+}
+.assign-form select:focus, .assign-form input:focus{ background: var(--white); }
+
+.assign-note{
+  display: block;
+  opacity: 0;
+  text-align: center;
+  color: var(--teal-deep);
+  font-weight: 700;
+  font-size: 13.5px;
+  margin-top: 10px;
+  transition: opacity .2s;
+}
+.assign-note.is-visible{ opacity: 1; }
+
+.assign-current-head{ margin-top: 30px; }
+
+
+/* ---------- Create Questions page ---------- */
+
+.assign-note.is-error{ color: #B06A6A; }
+
+.create-q{
+  border: 1.5px solid var(--line-strong);
+  border-radius: var(--radius-card);
+  padding: 16px 18px 8px;
+  margin-bottom: 16px;
+}
+.create-q-head{ display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.create-q-title{ font-weight: 600; font-size: 13.5px; color: var(--text); }
+.create-q .field{ margin-bottom: 12px; }
+.create-q .field textarea{ min-height: 64px; }
+
+.create-choice{ display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.create-correct{
+  width: 20px; height: 20px;
+  flex: none;
+  accent-color: var(--teal-deep);
+  cursor: pointer;
+}
+.create-choice-text{
+  flex: 1 1 auto;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-ctrl);
+  padding: 10px 15px;
+  background: var(--bg);
+}
+.create-choice-text:focus{ background: var(--white); }
+.create-q .field-hint{ margin: 0 0 10px; }
+
+.create-actions{ display: flex; gap: 10px; }
+
+/* ---------- Tabs in panel header (My Tutors / Map) ---------- */
+.tab-head{ justify-content: flex-start; gap: 28px; align-items: center; }
+.tab-btn{
+  background: none;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  padding: 0 0 4px;
+  cursor: pointer;
+  font: inherit;
+  color: var(--text-soft);
+}
+.tab-btn h2{ margin: 0; color: inherit; }
+.tab-btn:hover{ color: var(--text); }
+.tab-btn.active{ color: var(--text); border-bottom-color: var(--teal-deep); }
+
+.map-container{
+  width: 100%;
+  height: 550px;
+  background: var(--bg);
+  border-top: 3px solid var(--line);
+}
+.map-container[hidden], .thread-shell[hidden]{ display: none; }
+
+
+/* ---------- Settings page: centered username/password button + selectors ---------- */
+
+.settings-card #edit-login-link{
+  display: flex;
+  width: fit-content;
+  margin: 24px auto 8px;
+}
+
+/* The inner <form class="preference-form"> tags are dropped by the browser
+   (forms can't nest), so .preference-form never applies here. Style the
+   selector fields directly instead. */
+.settings-card .field{
+  padding: 8px 30px 0;
+  margin-bottom: 8px;
+  text-align: center;
+}
+.settings-card .field label{
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+.settings-card .field select{
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-ctrl);
+  padding: 11px 15px;
+  background: var(--bg);
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--text);
+}
+.settings-card .field select:focus{ background: var(--white); }
+
+
+/* ---------- Account setup page ---------- */
+
+.setup-card{
+  max-width: 640px;
+  min-height: 0;
+  justify-content: flex-start;   /* stop space-evenly from spreading sections unevenly */
+}
+.setup-card h2{
+  font-size: 18px;
+  margin: 0 0 10px;
+  text-align: left;
+}
+.setup-card h2 label{ font: inherit; color: inherit; margin: 0; display: inline; }
+.setup-card .setup-section{ margin-bottom: 26px; }
+.setup-card .setup-section .field{ margin-bottom: 0; }
+.setup-card .field-hint{ margin-top: 8px; }
+.setup-card .option-group{ gap: 16px; }
+.setup-card .option-panel h3{ margin-bottom: 4px; }
+.setup-card .option-panel p{ margin: 0; font-size: 13.5px; color: var(--text-soft); }
+
+/* Tutoring Type + Subject(s) side by side */
+.setup-row{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+.setup-card .field select{
+  width: 100%;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-ctrl);
+  padding: 11px 15px;
+  background: var(--bg);
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--text);
+}
+.setup-card .field select:focus{ background: var(--white); }
+
+/* Multi-select subject "chips" (same checked look as .option-panel) */
+.chip-group{ display: flex; flex-wrap: wrap; gap: 8px; }
+.chip{ position: relative; cursor: pointer; }
+.chip input{ position: absolute; opacity: 0; pointer-events: none; }
+.chip span{
+  display: inline-block;
+  padding: 9px 16px;
+  border: 1px solid var(--line-strong);
+  border-radius: 20px;
+  background: var(--white);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text);
+}
+.chip:hover span{ border-color: var(--teal-deep); }
+.chip:has(input:checked) span{ background: var(--choice-panels); border-color: var(--teal-deep); }
+.chip:has(input:focus-visible) span{ outline: 2px solid var(--teal-deep); outline-offset: 2px; }
+
+@media (max-width: 600px){
+  .setup-row{ grid-template-columns: 1fr; }
+  .setup-card .option-group{ flex-direction: column; }
+}
+
+
+/* ---------- Scrollable panels ---------- */
+
+/* Profile/Home card: the fixed-height .body scrolls when its content is longer */
+.profile-card .body{
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+/* Any panel holding a .row-list (Recommended, Search results): keep the
+   header fixed and let the list scroll inside the panel's 490px cap */
+.panel:has(> .row-list){
+  display: flex;
+  flex-direction: column;
+}
+.panel:has(> .row-list) > .row-list{
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+
+/* ---------- Messages pane sizing ---------- */
+
+/* Conversation list and message pane share one fixed height; the message
+   area scrolls and the compose bar stays pinned to the bottom. */
+.thread-shell{ min-height: 550px; }
+.thread-list{ overflow-y: auto; scrollbar-width: thin; }
+.thread-main{ height: 550px; min-height: 0; }
+.thread-messages{ min-height: 0; scrollbar-width: thin; }
+.thread-main-head, .thread-compose{ flex: 0 0 auto; }
+.bubble{ overflow-wrap: anywhere; }
+
+/* ---------- Prevent wide content from blowing out the messages grid ---------- */
+
+/* A bare 1fr column can't shrink below its content's width, so one long line
+   (a message, the compose input) makes the page wider than the screen. */
+.thread-shell{ grid-template-columns: 300px minmax(0, 1fr); }
+.thread-main, .thread-messages, .thread-compose input{ min-width: 0; }
+@media (max-width: 860px){
+  .thread-shell{ grid-template-columns: minmax(0, 1fr); }
+}
+
+
+/* ---------- Shared calendar (My Tutors / My Students) ---------- */
+
+.cal-shell{
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  height: 550px;
+  border-top: 3px solid var(--line);
+}
+.cal-shell[hidden]{ display: none; }
+
+.cal-main{ display: flex; flex-direction: column; min-width: 0; padding: 14px 20px 18px; }
+.cal-head{ display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.cal-head h3{ margin: 0; font-size: 16px; flex: 1; }
+.cal-nav{
+  width: 30px; height: 30px;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  background: var(--white);
+  color: var(--text);
+  font-size: 18px; line-height: 1;
+  cursor: pointer;
+}
+.cal-nav:hover{ border-color: var(--teal-deep); color: var(--teal-deep); }
+
+.cal-dow, .cal-grid{ display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); }
+.cal-dow span{ text-align: center; font-size: 12px; font-weight: 600; color: var(--text-soft); padding: 4px 0; }
+.cal-grid{
+  flex: 1 1 auto;
+  min-height: 0;
+  grid-template-rows: repeat(6, minmax(0, 1fr));
+  border-top: 1px solid var(--line-strong);
+  border-left: 1px solid var(--line-strong);
+}
+.cal-cell{
+  display: flex; flex-direction: column; gap: 2px;
+  min-width: 0;
+  padding: 3px 4px;
+  border: 0;
+  border-right: 1px solid var(--line-strong);
+  border-bottom: 1px solid var(--line-strong);
+  background: var(--white);
+  color: var(--text);
+  text-align: left;
+  overflow: hidden;
+  cursor: pointer;
+}
+.cal-cell:hover{ background: var(--bg); }
+.cal-cell.other{ background: #f3f6f6; color: var(--text-soft); }
+.cal-cell.selected{ outline: 2px solid var(--teal-deep); outline-offset: -2px; }
+.cal-num{ font-size: 12px; font-weight: 600; }
+.cal-cell.today .cal-num{
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: var(--teal-deep);
+  color: var(--white);
+}
+.cal-chip{
+  font-size: 10.5px; line-height: 1.3;
+  padding: 1px 5px;
+  border-radius: 4px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.cal-chip.mine{ background: var(--teal); color: var(--white); }
+.cal-chip.theirs{ background: var(--bg); color: var(--text); border-left: 3px solid var(--teal-deep); }
+.cal-more{ font-size: 10.5px; color: var(--text-soft); }
+
+.cal-side{ border-left: 3px solid var(--line); padding: 16px 20px 20px; overflow-y: auto; scrollbar-width: thin; }
+.cal-side h3{ font-size: 14px; margin: 0 0 8px; }
+.cal-empty{ color: var(--text-soft); font-size: 13px; margin: 0; }
+.cal-event{
+  display: flex; justify-content: space-between; gap: 10px;
+  padding: 10px 0;
+  border-top: 1px solid var(--line-strong);
+}
+.cal-event:first-child{ border-top: none; }
+.cal-event-title{ font-weight: 700; font-size: 14px; overflow-wrap: anywhere; }
+.cal-event-meta{ color: var(--text-soft); font-size: 12.5px; }
+.cal-event-notes{ font-size: 13px; margin-top: 4px; overflow-wrap: anywhere; }
+.cal-del{
+  flex: none; align-self: flex-start;
+  width: 24px; height: 24px;
+  border: none; background: none;
+  color: var(--text-soft);
+  font-size: 20px; line-height: 1;
+  cursor: pointer;
+}
+.cal-del:hover{ color: var(--text); }
+
+.cal-form{ margin-top: 16px; border-top: 3px solid var(--line); padding-top: 14px; }
+.cal-form .field{ margin-bottom: 12px; }
+.cal-form select{
+  width: 100%;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-ctrl);
+  padding: 10px 12px;
+  background: var(--bg);
+}
+.cal-form textarea{ min-height: 56px; }
+.cal-row{ display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+@media (max-width: 860px){
+  .cal-shell{ grid-template-columns: minmax(0, 1fr); height: auto; }
+  .cal-grid{ min-height: 420px; }
+  .cal-side{ border-left: none; border-top: 3px solid var(--line); }
+}
+
+
+/* ---------- Settings page: centered subject chips, role panels, location row ---------- */
+.settings-card .chip-group{ justify-content: center; }
+.settings-card .option-group{ gap: 16px; }
+.settings-card .field input[type="number"]{
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+}
+.settings-card .location-controls{ max-width: 520px; margin: 0 auto; }
+.settings-card .field-hint{ text-align: center; }
+@media (max-width: 640px){
+  .settings-card .option-group{ flex-direction: column; }
+}
+
+
+/* ---------- Map tab: approximate tutor/student locations ---------- */
+.map-avatar{
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #3f7f8a;
+  color: var(--white);
+  border: 2px solid var(--white);
+  box-shadow: var(--shadow-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.map-container .mapboxgl-popup-content{ font-family: inherit; font-size: 13px; color: var(--text); }
+.map-note{
+  position: absolute;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+  z-index: 2;
+  background: var(--white);
+  color: var(--text);
+  font-size: 13px;
+  padding: 8px 14px;
+  border-radius: var(--radius-ctrl);
+  box-shadow: var(--shadow-card);
+}
+
+
+/* ---------- Create Questions: AI draft box ---------- */
+.ai-box{
+  margin: 0 0 18px;
+  padding: 14px 16px;
+  border: 1px dashed var(--teal-deep);
+  border-radius: var(--radius-ctrl);
+  background: rgba(167, 193, 197, 0.18);
+}
+.ai-box-title{ font-weight: 700; color: var(--text); margin-bottom: 10px; }
+.ai-row{ display: flex; gap: 10px; flex-wrap: wrap; }
+.ai-row input[type="text"]{ flex: 1 1 260px; min-width: 0; }
+.ai-status{ margin: 10px 0 0; text-align: left; }
+.ai-status.is-error{ color: #a34a4a; }
+
+
+/* ---------- Ratings ---------- */
+.stars-wrap{ display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.stars-meta{ font-size: 12px; color: var(--text); opacity: 0.7; white-space: nowrap; }
+.profile-stars{ margin: 0 0 12px; }
+.profile-stars .stars-meta{ margin-left: 6px; font-size: 13px; }
+#rating-status{ margin: 8px 0 0; }

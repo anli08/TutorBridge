@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Messages · TutorBridge</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="topnav">
+  <div class="topnav-inner">
+    <a href="home.html" class="logo">
+      <svg width="40" height="40" viewBox="0 0 200 200" role="img" aria-label="TutorBridge">
+        <rect x="20" y="20" width="160" height="160" rx="28" fill="#A7C1C5"/>
+        <path d="M60,120 Q100,60 140,120" fill="none" stroke="#FFFFFF" stroke-width="12" stroke-linecap="round"/>
+        <line x1="50" y1="120" x2="150" y2="120" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round"/>
+        <line x1="80" y1="95" x2="80" y2="120" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round"/>
+        <line x1="120" y1="95" x2="120" y2="120" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round"/>
+      </svg>
+    </a>   
+    <div class="search-wrap">
+      <input type="search" class="search-input" placeholder="Search Users"
+             onkeydown="if(event.key==='Enter')window.location.href='search-results.html'">
+    </div>
+    <nav class="nav-links">
+      <a href="messages.html" class="active">Messages</a>
+      <a href="mytutors.html" id = "my-tutors-link">My Tutors</a>
+      <a href="settings.html">Settings</a>
+<a href="#" class="bell-btn" aria-label="Notifications" onclick="return false;">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/>
+        </svg>
+      <span class="bell-dot">
+      </span></a>    </nav>
+  </div>
+</header>
+
+<main class="shell">
+  <div class="panel thread-panel">
+    <div class="panel-head"><h2>Messages</h2></div>
+    <div class="thread-shell">
+      <div class="thread-list" id="conversation-list"></div>
+
+      <div class="thread-main">
+        <div class="thread-main-head" id="thread-head"></div>
+        <div class="thread-messages" id="thread-body"></div>
+        <form class="thread-compose" id="compose-form" style="display:flex">
+          <input type="text" id="compose-input" placeholder="Write a message…" autocomplete="off">
+          <button type="submit" class="btn btn-primary">Send</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src = "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Setup · TutorBridge</title>
+<link rel = "stylesheet" href = "styles.css">
+</head>
+<body>
+<div class="auth-shell">
+    <div class="auth-card setup-card">
+        <form id="setup-form">
+
+            <section class="setup-section">
+                <h2>Name</h2>
+                <div class="field">
+                    <input type="text" id="name" required>
+                </div>
+            </section>
+
+            <section class="setup-section" id="role-form">
+                <h2>Are You a Tutor or a Student?</h2>
+                <div class="option-group">
+                    <label class="option-panel">
+                        <input type="radio" name="role" value="student" checked>
+                        <div class="option-content">
+                            <h3>Student</h3>
+                            <p>Find a tutor to help you learn!</p>
+                        </div>
+                    </label>
+
+                    <label class="option-panel">
+                        <input type="radio" name="role" value="tutor">
+                        <div class="option-content">
+                            <h3>Tutor</h3>
+                            <p>Help students learn!</p>
+                        </div>
+                    </label>
+                </div>
+            </section>
+
+            <section class="setup-section">
+                <h2>Preferred Rate / Rate Per Hour</h2>
+                <div class="field">
+                    <input type="number" id="rate" value="20" min="0" step="0.01" required>
+                </div>
+            </section>
+
+            <section class="setup-section">
+                <div class="field location-field">
+                    <h2><label for="address">Location</label></h2>
+                    <div class="location-controls">
+                        <input type="text" id="address" placeholder="Use your current location" readonly>
+                        <button type="button" class="btn" id="use-location">Use my current location</button>
+                    </div>
+                    <p class="field-hint" id="location-status" role="status" aria-live="polite">
+                        Your location is optional and is only used to help match you with nearby users. Only an approximate location (about 1 km) is saved.
+                    </p>
+                    <input type="hidden" id="latitude">
+                    <input type="hidden" id="longitude">
+                </div>
+            </section>
+
+            <section class="setup-section setup-row">
+                <div class="field">
+                    <h2><label for="tutor-type">Tutoring Type</label></h2>
+                    <select id="tutor-type">
+                        <option value="online">Online</option>
+                        <option value="in-person">In Person</option>
+                    </select>
+                </div>
+
+                <div class="field" role="group" aria-labelledby="subjects-heading">
+                    <h2 id="subjects-heading">Subject(s)</h2>
+                    <div class="chip-group" id="subjects">
+                        <label class="chip"><input type="checkbox" value="math"><span>Math</span></label>
+                        <label class="chip"><input type="checkbox" value="english"><span>English</span></label>
+                        <label class="chip"><input type="checkbox" value="science"><span>Science</span></label>
+                        <label class="chip"><input type="checkbox" value="history"><span>History</span></label>
+                    </div>
+                </div>
+            </section>
+
+            <button type="submit" class="btn btn-primary btn-block">Continue</button>
+        </form>
+    </div>
+</div>
+<script src = "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="app.js"></script>
+</body>
+</html>

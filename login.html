@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Log In · TutorBridge</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="auth-shell">
+  <div class="auth-card">
+    <h2>Log In</h2>
+
+    <form id="login-form">
+      <div class="field">
+        <label for="login-email">Email</label>
+        <input type="email" id="login-email" required>
+      </div>
+      <div class="field">
+        <label for="login-password">Password</label>
+        <input type="password" id="login-password" required>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">Log In</button>
+    </form>
+
+    <div class="auth-divider">Or</div>
+    <p class="auth-foot"><a href="signup.html">Create Account</a></p>
+  </div>
+</div>
+
+<script src = "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="app.js"></script>
+</body>
+</html>
