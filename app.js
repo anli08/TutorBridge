@@ -72,17 +72,13 @@ let _rolePromise = null;
 
 function getType(){
   if (!_rolePromise){
-    console.log("RUN");
     _rolePromise = (async () => {
-      console.log("RUN");
       const { data: { user }, error: authError } = await supabaseClient.auth.getUser();
       if (authError || !user){
-        console.log("Error");
         console.error(authError);
         if (authError) alert(authError.message);
         return;
       }
-      console.log("RUN");
       const { data, error } = await supabaseClient
         .from("User Information")
         .select("type")
@@ -94,7 +90,6 @@ function getType(){
         return;
       }
 
-    console.log(data.type);
     return data.type;
     })();
   }
@@ -114,7 +109,6 @@ async function updateTutorNav(){
   if(!type){
     return;
   }
-  console.log("check");
 
   if(type === "tutor"){
     link.textContent = "My Students";
@@ -122,7 +116,6 @@ async function updateTutorNav(){
     if (addBtn) addBtn.textContent = "Add to My Students";
   }
   else{
-    console.log("RUN");
     link.textContent = "My Tutors";
     link.href = "mytutors.html";
   }
@@ -676,7 +669,6 @@ async function loadProfile(){
   setText("profile-avatar", name.split(" ").map(w => w[0]).join("").slice(0, 2).toUpperCase());
 
   const isTutor = p.type === "tutor";
-  console.log(p.type);
   isTutor ? setText("displayed-subject", "Subjects Tutored") : setText("displayed-subject", "Interested Subjects");
   setText("profile-subject", p.subjects);
   isTutor ? setText("displayed-rate", "Rate") : setText("displayed-rate", "Prefered Rate");
@@ -1408,9 +1400,6 @@ function wireLoginForm(){
     }
 
     const user = data.user;
-
-    console.log("USER:", user);
-    console.log("USER ID:", user.id);
     const {data: userInfo, error: infoError} = await supabaseClient
       .from("User Information")
       .select("id")
@@ -1444,7 +1433,6 @@ function wireSignupForm(){
 
   form.addEventListener("submit", async(event) => {
     event.preventDefault();
-    console.log("SUBMIT EVENT");
     const email = document.getElementById("signup-email").value;
     const password = document.getElementById("signup-password").value;
 
@@ -1810,8 +1798,6 @@ async function wireEditLoginPage(){
     event.preventDefault();
     const oldPass = document.getElementById("old-password");
     const newPass = document.getElementById("new-password");
-
-    console.log(oldPass.value);
 
     const {error: verifyError} = await supabaseClient.auth.signInWithPassword({
       email: user.email,
